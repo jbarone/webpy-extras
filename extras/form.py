@@ -1,5 +1,6 @@
 import web
 from web import form
+from helper import csrf_token
 
 class MVCInput(form.Input):
     """
@@ -262,3 +263,28 @@ class MVCFile(form.File, MVCInput):
     """
 
     pass
+
+class CsrfInput(form.Hidden):
+    """
+    CSRF Hidden Input
+
+    >>> import tempfile
+    >>> session = web.session.Session(None, web.session.DiskStore(tempfile.mkdtemp()))
+    >>> session.csrf_token = 'test'
+    >>> ci = CsrfInput('name', session)
+    >>> ci.render()
+    u'<input type="hidden" id="name" value="test" name="name"/>'
+    >>> session._cleanup()
+    """
+
+    def __init__(self, name, session, token='csrf_token', *validators, **attrs):
+        self.session = session
+        self.token = token
+        super(CsrfInput, self).__init__(name, *validators, **attrs)
+
+    def render(self):
+        attrs = self.attrs.copy()
+        attrs['type'] = self.get_type()
+        attrs['value'] = csrf_token(self.session, self.token)
+        attrs['name'] = self.name
+        return '<input %s/>' % attrs
