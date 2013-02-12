@@ -271,20 +271,20 @@ class CsrfInput(form.Hidden):
     >>> import tempfile
     >>> session = web.session.Session(None, web.session.DiskStore(tempfile.mkdtemp()))
     >>> session.csrf_token = 'test'
-    >>> ci = CsrfInput('name', session)
+    >>> ci = CsrfInput('name', lambda: csrf_token(session))
     >>> ci.render()
     u'<input type="hidden" id="name" value="test" name="name"/>'
     >>> session._cleanup()
     """
 
-    def __init__(self, name, session, token='csrf_token', *validators, **attrs):
-        self.session = session
+    def __init__(self, name, token_fetch, token='csrf_token', *validators, **attrs):
+        self.token_fetch = token_fetch
         self.token = token
         super(CsrfInput, self).__init__(name, *validators, **attrs)
 
     def render(self):
         attrs = self.attrs.copy()
         attrs['type'] = self.get_type()
-        attrs['value'] = csrf_token(self.session, self.token)
+        attrs['value'] = self.token_fetch()
         attrs['name'] = self.name
         return '<input %s/>' % attrs
