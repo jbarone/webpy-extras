@@ -8,6 +8,7 @@ __author__ = [
 __license__ = "public domain"
 
 import decorators
+import form
 
 from decorators import *
-
+from form import *
