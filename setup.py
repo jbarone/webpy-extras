@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 from distutils.core import setup
-from web.extras import __version__
+from extras import __version__
 
 setup(name='webpy-extras',
       version=__version__,
@@ -11,7 +11,7 @@ setup(name='webpy-extras',
       maintainer='Joshua Barone',
       maintainer_email='jbarone@justbecausesoftware.com',
       url=' http://webpy-extras.justbecausesoftware.com/',
-      packages=['web', 'web.extras'],
+      packages=['extras'],
       long_description="Extras for building web.py applications",
       license="Public domain",
       platforms=["any"],
