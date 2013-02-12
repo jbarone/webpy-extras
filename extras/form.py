@@ -1,6 +1,5 @@
 import web
 from web import form
-from helper import csrf_token
 
 class MVCInput(form.Input):
     """
@@ -269,17 +268,17 @@ class CsrfInput(form.Hidden):
     CSRF Hidden Input
 
     >>> import tempfile
+    >>> from helper import csrf_token
     >>> session = web.session.Session(None, web.session.DiskStore(tempfile.mkdtemp()))
     >>> session.csrf_token = 'test'
-    >>> ci = CsrfInput('name', lambda: csrf_token(session))
+    >>> ci = CsrfInput(lambda: csrf_token(session), 'name')
     >>> ci.render()
     u'<input type="hidden" id="name" value="test" name="name"/>'
     >>> session._cleanup()
     """
 
-    def __init__(self, name, token_fetch, token='csrf_token', *validators, **attrs):
+    def __init__(self, token_fetch, name='csrf_token', *validators, **attrs):
         self.token_fetch = token_fetch
-        self.token = token
         super(CsrfInput, self).__init__(name, *validators, **attrs)
 
     def render(self):
