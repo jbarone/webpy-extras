@@ -1,7 +1,16 @@
-import web
-from web import form
+#!/usr/bin/env python
+"""
+Form inputs for use in web.py forms.
 
-class MVCInput(form.Input):
+This collection includes the HTML5 input types.
+"""
+
+import web
+
+__version__ = "0.1"
+__author__ = ["Joshua Barone <jbarone@justbecausesoftware.com>"]
+
+class MVCInput(web.form.Input):
     """
     HTML Input field. This field allows for the template to add style
     attributes to form input fields, for a more complete seperate of
@@ -181,7 +190,7 @@ class MVCColor(MVCInput):
     def get_type(self):
         return 'color'
 
-class MVCTextarea(form.Textarea, MVCInput):
+class MVCTextarea(web.form.Textarea, MVCInput):
     """
     HTML Text Area
 
@@ -191,7 +200,7 @@ class MVCTextarea(form.Textarea, MVCInput):
 
     pass
 
-class MVCDropdown(form.Dropdown, MVCInput):
+class MVCDropdown(web.form.Dropdown, MVCInput):
     r"""
     HTML Dropdown
 
@@ -203,7 +212,7 @@ class MVCDropdown(form.Dropdown, MVCInput):
 
     pass
 
-class MVCGroupedDropdown(form.GroupedDropdown, MVCInput):
+class MVCGroupedDropdown(web.form.GroupedDropdown, MVCInput):
     r"""
     HTML Grouped Dropdown
 
@@ -215,7 +224,7 @@ class MVCGroupedDropdown(form.GroupedDropdown, MVCInput):
 
     pass
 
-class MVCRadio(form.Radio, MVCInput):
+class MVCRadio(web.form.Radio, MVCInput):
     """
     HTML Radio Box
 
@@ -225,7 +234,7 @@ class MVCRadio(form.Radio, MVCInput):
 
     pass
 
-class MVCCheckbox(form.Checkbox, MVCInput):
+class MVCCheckbox(web.form.Checkbox, MVCInput):
     """
     HTML Email Box
 
@@ -242,7 +251,7 @@ class MVCCheckbox(form.Checkbox, MVCInput):
 
     pass
 
-class MVCButton(form.Button, MVCInput):
+class MVCButton(web.form.Button, MVCInput):
     """HTML Button.
     
     >>> MVCButton("save").render_mvc()
@@ -253,7 +262,7 @@ class MVCButton(form.Button, MVCInput):
 
     pass
 
-class MVCFile(form.File, MVCInput):
+class MVCFile(web.form.File, MVCInput):
     """
     HTML File Box
 
@@ -263,7 +272,7 @@ class MVCFile(form.File, MVCInput):
 
     pass
 
-class CsrfInput(form.Hidden):
+class CsrfInput(web.form.Hidden):
     """
     CSRF Hidden Input
 

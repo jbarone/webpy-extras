@@ -1,4 +1,12 @@
+#!/usr/bin/env python
+"""
+Helper functions
+"""
+
 import web
+
+__version__ = "0.1"
+__author__ = ["Joshua Barone <jbarone@justbecausesoftware.com>"]
 
 def csrf_token(session, token='csrf_token'):
     """

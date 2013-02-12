@@ -3,7 +3,6 @@
 
 __version__ = "0.1"
 __author__ = ["Joshua Barone <jbarone@justbecausesoftware.com>"]
-__license__ = "public domain"
 
 import decorators
 import form
