@@ -31,14 +31,14 @@ def csrf_protected(session, token='csrf_token'):
     """
     Will ensure that a correct csrf token is provided in a POST.
 
-    :param session the session collection containing the csrf token value
+    :param session function to getthe session collection
     :param token the name of the token in the form
     """
     def wrap(f):
         def wrapped_f(*args, **kwargs):
             inputs = web.input(_unicode=False)
             if not (inputs.has_key(token) and
-                    inputs.get(token) == session.pop(token, None)):
+                    inputs.get(token) == session().pop(token, None)):
                 raise web.badrequest()
             return f(*args, **kwargs)
         return wrapped_f

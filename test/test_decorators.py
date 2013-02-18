@@ -36,8 +36,10 @@ class TestDecorators():
         urls = (
             '/test', 'hello'
         )
+        def get_session():
+            return session
         class hello:
-            @csrf_protected(session)
+            @csrf_protected(get_session)
             def POST(self):
                 assert False
         app = web.application(urls, locals())
@@ -50,8 +52,10 @@ class TestDecorators():
         urls = (
             '/test', 'hello'
         )
+        def get_session():
+            return session
         class hello:
-            @csrf_protected(session)
+            @csrf_protected(get_session)
             def POST(self):
                 return 'test'
         app = web.application(urls, locals())
