@@ -31,7 +31,7 @@ def csrf_protected(session, token='csrf_token'):
     """
     Will ensure that a correct csrf token is provided in a POST.
 
-    :param session function to getthe session collection
+    :param session function to get the session collection
     :param token the name of the token in the form
     """
     def wrap(f):
